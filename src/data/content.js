@@ -112,6 +112,23 @@ export const promise = {
   ],
 };
 
+// Industries list (copy from the "Built for businesses like yours." design).
+export const industriesListIntro = {
+  label: "— Industries",
+  title: "Built for businesses",
+  titleMuted: "like yours.",
+  text: "We work in five niches, deeply. Each one has its own portfolio, its own pricing instincts, and its own idea of what \"launch day\" looks like. Pick the one that fits.",
+  cta: "View work",
+};
+
+export const industriesList = [
+  { name: "Wedding Businesses", tag: "Our niche", href: "https://wedding.formexastudio.com/" },
+  { name: "Photographers & Creatives", tag: "Portfolio-led", href: "#contact" },
+  { name: "Lifestyle & Local Business", tag: "Local SEO", href: "#contact" },
+  { name: "Aesthetic & Beauty", tag: "Booking-first", href: "#contact" },
+  { name: "Dental & Healthcare Practices", tag: "Compliance-aware", href: "#contact" },
+];
+
 export const industries = [
   {
     name: 'Wedding Businesses',

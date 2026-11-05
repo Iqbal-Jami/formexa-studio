@@ -10,6 +10,7 @@
   --display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --body: 'Inter Variable', system-ui, sans-serif;
   --serif: 'Instrument Serif', Georgia, serif;
+  --mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   --pad: clamp(1.25rem, 4vw, 4rem);
   --nav-w: min(1180px, calc(100% - 2rem)); /* nav bar width; the hero orbit reuses it */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -390,6 +391,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .btn-frame:hover, .btn-frame:focus-visible { color: var(--cobalt); }
 .btn-frame:hover::before, .btn-frame:focus-visible::before { transform: scale(1.08, 1.2); }
 
+
 /* ───────── Industries (pinned horizontal) ───────── */
 .industries { position: relative; background: var(--ink); color: var(--paper); }
 .industries__pin { height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: clamp(1.5rem, 4vh, 3rem); overflow: hidden; padding-top: 4.5rem; }
@@ -632,7 +634,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .orbit > * { --s: clamp(36px, 6cqi, 80px); --d: calc(100cqi - var(--s) * 1.42 - 12px); }
 .orbit__ring { position: absolute; left: 50%; top: 0; border-radius: 50%; border: 1.5px dashed rgba(242, 241, 255, 0.28); }
 .orbit__ring--inner { width: calc(var(--d) * 0.5); height: calc(var(--d) * 0.5); translate: -50% -50%; }
-.orbit__ring--outer { width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border-style: dotted; animation: orbit 90s linear infinite; will-change: transform; }
+.orbit__ring--outer { width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border-style: dotted; animation: orbit 60s linear infinite; /* was 90s; 1.5x faster */ will-change: transform; }
 .orbit__tile {
   position: absolute;
   left: 50%;
@@ -654,3 +656,45 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (prefers-reduced-motion: reduce) { .orbit__ring--outer { animation: none; } }
 
 @media (max-width: 640px) { .spin { top: 6.2rem; right: 1rem; width: 96px; } .spin__ring text { font-size: 18px; } }
+
+/* ───────── Mono label ("> — INDUSTRIES"), reusable eyebrow variant ───────── */
+.eyebrow--mono { gap: 0.7rem; margin: 0; font-family: var(--mono); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #5f5f68; }
+.eyebrow--mono::before { width: 0.42em; height: 0.42em; margin-right: 0.15em; background: none; border: solid var(--cobalt); border-width: 1.5px 1.5px 0 0; rotate: 45deg; }
+
+/* ───────── Industries (list with hover reveal) ───────── */
+.ind { --ind-bg: #eeece6; --ind-line: rgba(13, 13, 43, 0.12); --ind-muted: #4d505c; --ind-hover: color-mix(in srgb, var(--cobalt) 80%, #fff); background: var(--ind-bg); color: #111117; padding: clamp(3.5rem, 6vw, 4rem) 0 clamp(4rem, 8vw, 6rem); }
+.ind :focus-visible { outline-color: var(--cobalt); }
+.ind__wrap { width: min(1184px, calc(100% - 2 * var(--pad))); margin-inline: auto; }
+.ind__head { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 1.5rem 40px; align-items: start; }
+.ind__label { display: flex; padding-top: 0.85rem; margin-top: 1.1rem; border-top: 1px solid var(--ind-line); }
+.ind__title { font-family: var(--display); font-weight: 800; font-size: clamp(2.3rem, 4.5vw, 4.05rem); line-height: 1; letter-spacing: -0.045em; text-wrap: balance; }
+.ind__muted { color: var(--ind-muted); }
+.ind__text { max-width: 34em; margin-top: 0.95rem; font-size: 1.0625rem; line-height: 1.65; color: #2a2a30; }
+.ind__list { margin-top: clamp(3rem, 5vw, 4.1rem); border-top: 1px solid var(--ind-line); }
+.ind__item { border-bottom: 1px solid var(--ind-line); }
+.ind__row { display: grid; grid-template-columns: 85px minmax(0, 1fr) auto 106px; align-items: center; min-height: 87px; padding: 0.9rem 0; }
+.ind__row:focus-visible { outline-offset: -3px; border-radius: 4px; }
+.ind__num { font-family: var(--mono); font-size: 0.75rem; color: #5f5f68; }
+.ind__name { font-family: var(--display); font-weight: 800; font-size: clamp(1.55rem, 2.6vw, 2.3rem); line-height: 1.1; letter-spacing: -0.035em; }
+.ind__num, .ind__name { transition: transform 0.45s var(--ease), color 0.3s var(--ease); }
+.ind__tag { justify-self: end; padding: 0.3rem 0.7rem; border: 1px solid rgba(13, 13, 43, 0.2); border-radius: 999px; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: #5f5f68; white-space: nowrap; }
+.ind__go { justify-self: end; display: flex; align-items: center; gap: 0.9rem; padding-right: 10px; opacity: 0; transform: translateX(-10px); transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
+.ind__go-text { width: 4ch; font-family: var(--mono); font-size: 0.72rem; font-weight: 600; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; }
+.ind__chev { width: 28px; height: 42px; }
+.ind__row:hover .ind__num, .ind__row:hover .ind__name, .ind__row:focus-visible .ind__num, .ind__row:focus-visible .ind__name { transform: translateX(16px); }
+.ind__row:hover .ind__name, .ind__row:focus-visible .ind__name { color: var(--ind-hover); }
+.ind__row:hover .ind__go, .ind__row:focus-visible .ind__go { opacity: 1; transform: none; }
+/* Touch screens: no hover, so the arrow is always shown */
+@media (hover: none) { .ind__go { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .ind__head { grid-template-columns: 1fr; }
+  .ind__label { margin-top: 0; }
+  .ind__row { grid-template-columns: 2.4rem minmax(0, 1fr) auto; grid-template-areas: 'num name go' 'num tag go'; row-gap: 0.55rem; padding: 1.1rem 0; }
+  .ind__num { grid-area: num; align-self: start; padding-top: 0.55em; }
+  .ind__name { grid-area: name; }
+  .ind__tag { grid-area: tag; justify-self: start; }
+  .ind__go { grid-area: go; }
+  .ind__go-text { display: none; }
+  .ind__chev { width: 16px; height: 26px; }
+  .ind__row:hover .ind__num, .ind__row:hover .ind__name, .ind__row:focus-visible .ind__num, .ind__row:focus-visible .ind__name { transform: translateX(8px); }
+}

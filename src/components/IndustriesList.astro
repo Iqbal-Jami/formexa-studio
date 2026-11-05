@@ -1,0 +1,33 @@
+---
+import { industriesList as industries, industriesListIntro as intro } from '../data/content.js';
+---
+<section class="ind" id="industries-list">
+  <div class="ind__wrap">
+    <header class="ind__head">
+      <p class="eyebrow eyebrow--mono ind__label">{intro.label}</p>
+      <div class="ind__intro">
+        <h2 class="ind__title">{intro.title} <span class="ind__muted">{intro.titleMuted}</span></h2>
+        <p class="ind__text">{intro.text}</p>
+      </div>
+    </header>
+
+    <ul class="ind__list" data-ind-list>
+      {industries.map((ind, i) => {
+        const external = ind.href.startsWith('http');
+        return (
+          <li class="ind__item" data-ind-row>
+            <a class="ind__row" href={ind.href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+              <span class="ind__num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="ind__name">{ind.name}</span>
+              <span class="ind__tag">{ind.tag}</span>
+              <span class="ind__go" aria-hidden="true">
+                <span class="ind__go-text">{intro.cta}</span>
+                <svg class="ind__chev" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="square"><path d="M4 3l16 17L4 37" /></svg>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

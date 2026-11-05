@@ -346,6 +346,21 @@ mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
   });
 });
 
+
+/* ───────── Industries list: rows rise in once (hover itself is pure CSS) ───────── */
+const indRows = $$('[data-ind-row]');
+if (indRows.length && !reduce) {
+  gsap.fromTo(indRows, { opacity: 0, y: 24 }, {
+    opacity: 1,
+    y: 0,
+    duration: 0.9,
+    ease: 'expo.out',
+    stagger: 0.08,
+    clearProps: 'transform',
+    scrollTrigger: { trigger: '[data-ind-list]', start: 'top 85%', once: true },
+  });
+}
+
 /* ───────── Process: rail fills, steps light up ───────── */
 const steps = $$('[data-step]');
 if (steps.length) {
