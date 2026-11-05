@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Solutions from '../components/Solutions.astro';
+import Industries from '../components/Industries.astro';
+import WhyFormexa from '../components/WhyFormexa.astro';
+import Process from '../components/Process.astro';
+import Work from '../components/Work.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { marqueeWords, marqueePhrases } from '../data/content.js';
+---
+<Base>
+  <div class="loader" data-loader aria-hidden="true">
+    <span class="loader__word">Formexa</span>
+    <span class="loader__count" data-count-load>0</span>
+  </div>
+  <div class="cursor" data-cursor aria-hidden="true"><i></i></div>
+  <Nav />
+  <main>
+    <Hero />
+    <Marquee />
+    <Solutions />
+    <Industries />
+    <WhyFormexa />
+    <Process />
+    <Work />
+    <Pricing />
+    <Marquee variant="outline" items={marqueeWords} speed={70} />
+    <Faq />
+    <Marquee variant="lilac" items={marqueePhrases} reverse speed={60} />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

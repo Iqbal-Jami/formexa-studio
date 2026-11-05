@@ -1,0 +1,28 @@
+---
+import '@fontsource-variable/bricolage-grotesque/wdth.css';
+import '@fontsource-variable/inter';
+import '@fontsource/instrument-serif/400.css';
+import '../styles/global.css';
+
+const { title = 'Formexa Studio | Building brands that matter', description = 'A UK digital agency for web design, SEO, marketing and automation. We build digital experiences that help the right customers find you and choose you.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#2B2BFF" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>

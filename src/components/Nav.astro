@@ -1,0 +1,23 @@
+---
+import { nav } from '../data/content.js';
+---
+<header class="nav" data-nav>
+  <a href="#top" class="nav__logo" aria-label="Formexa Studio, back to top">
+    <span class="nav__mark" aria-hidden="true">F</span>
+    <span class="nav__word">Formexa</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    {nav.map((l) => <a href={l.href} data-nav-link>{l.label}</a>)}
+  </nav>
+  <a href="#contact" class="btn btn--butter btn--sm" data-magnetic>Get started</a>
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false" data-burger>
+    <span></span><span></span>
+  </button>
+</header>
+<div class="menu" data-menu aria-hidden="true">
+  <nav aria-label="Mobile">
+    {nav.map((l) => <a href={l.href} data-menu-link>{l.label}</a>)}
+    <a href="#contact" data-menu-link class="menu__cta">Get started</a>
+  </nav>
+</div>
+<div class="progress" data-progress aria-hidden="true"></div>

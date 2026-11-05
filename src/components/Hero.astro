@@ -1,0 +1,81 @@
+---
+import { verbs, pillars } from '../data/content.js';
+import Art from './Art.astro';
+const lines = ['Building', 'brands', 'that matter.'];
+---
+<section class="hero" id="top" data-hero>
+  <div class="hero__field" aria-hidden="true">
+    <svg class="blob blob--a" viewBox="0 0 600 600"><path fill="var(--butter)" d="M421 98c64 44 107 118 98 190s-70 142-143 180-157 44-216-3S74 345 91 266 188 107 276 70s81-16 145 28z"><animate attributeName="d" dur="14s" repeatCount="indefinite" values="M421 98c64 44 107 118 98 190s-70 142-143 180-157 44-216-3S74 345 91 266 188 107 276 70s81-16 145 28z;M455 130c52 56 70 130 40 200s-103 124-180 142-160-2-206-62-35-150 12-218S295 36 358 52s97 22 97 78z;M421 98c64 44 107 118 98 190s-70 142-143 180-157 44-216-3S74 345 91 266 188 107 276 70s81-16 145 28z"/></path></svg>
+    <svg class="blob blob--b" viewBox="0 0 600 600"><path fill="var(--lilac)" d="M380 60c72 30 130 110 120 190s-90 150-172 180-170 20-218-40S30 280 80 200 220 70 290 50s16-10 90 10z"><animate attributeName="d" dur="18s" repeatCount="indefinite" values="M380 60c72 30 130 110 120 190s-90 150-172 180-170 20-218-40S30 280 80 200 220 70 290 50s16-10 90 10z;M400 90c60 50 90 130 60 205s-120 140-200 150-150-40-185-110 0-160 60-215S330 30 400 90z;M380 60c72 30 130 110 120 190s-90 150-172 180-170 20-218-40S30 280 80 200 220 70 290 50s16-10 90 10z"/></path></svg>
+    <div class="spot" data-spot></div>
+    <div class="orbit">
+      <span class="orbit__ring orbit__ring--inner"></span>
+      <div class="orbit__ring orbit__ring--outer">
+        <span class="orbit__tile" style="--a:20deg; --t:-12deg">
+          <svg viewBox="0 0 24 24"><g fill="currentColor"><circle cx="9" cy="5" r="3.2"/><circle cx="15" cy="5" r="3.2"/><circle cx="9" cy="12" r="3.2"/><circle cx="15.2" cy="12" r="3.2"/><circle cx="9" cy="19" r="3.2"/></g></svg>
+        </span>
+        <span class="orbit__tile" style="--a:110deg; --t:20deg">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h14v6h-7zM5 9h7l7 6H12v6l-7-6z"/></svg>
+        </span>
+        <span class="orbit__tile" style="--a:200deg; --t:-28deg">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 6h4l2.6 8L11 6h3l2.4 8L19 6h3l-4.4 12h-3L12 10l-2.6 8h-3z"/></svg>
+        </span>
+        <span class="orbit__tile" style="--a:290deg; --t:8deg">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="currentColor" d="M6.2 9h2.6l2 6 1.2-3.6-.8-2.4h2.6l2 6 1.7-6h1.4l-2.6 8h-1.2L12.8 13l-1.3 4h-1.2z"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__inner">
+    <p class="hero__kicker" data-reveal-hero>Digital studio, Exeter UK</p>
+
+    <h1 class="hero__title" data-letters aria-label="Building brands that matter.">
+      {lines.map((line) => (
+        <span class="line" aria-hidden="true">
+          {line.split(' ').map((word) => (
+            <span class="word">
+              {word.split('').map((ch) => <span class="ch" data-ch>{ch}</span>)}
+            </span>
+          ))}
+        </span>
+      ))}
+    </h1>
+
+    <div class="hero__row">
+      <p class="hero__lede" data-reveal-hero>
+        We turn ideas into websites that get found, get chosen and keep working for your business.
+      </p>
+      <div class="hero__cta" data-reveal-hero>
+        <a href="#contact" class="btn btn--butter" data-magnetic>Book a 30 min meeting</a>
+        <a href="#work" class="btn btn--ghost" data-magnetic>See our work</a>
+      </div>
+    </div>
+
+    <div class="hero__improve" data-reveal-hero>
+      <span class="hero__improve-label">What we improve</span>
+      <span class="verbs" aria-live="off">
+        {[...verbs, verbs[0]].map((v, i) => <span class="verb" style={`--i:${i}`} aria-hidden={i === verbs.length ? 'true' : undefined}>{v}</span>)}
+      </span>
+    </div>
+  </div>
+
+  <a href="#contact" class="spin" data-magnetic aria-label="Book a 30 min meeting">
+    <svg class="spin__ring" viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="spin-path" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+      <text><textPath href="#spin-path" textLength="458" lengthAdjust="spacing">Book a 30 min meeting • Formexa Studio • </textPath></text>
+    </svg>
+    <span class="spin__core" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg>
+    </span>
+  </a>
+
+  <ul class="pillars" data-reveal-hero>
+    {pillars.map((p) => (
+      <li class="pillar">
+        <Art kind={p.kind} />
+        <span>{p.title}</span>
+      </li>
+    ))}
+  </ul>
+</section>

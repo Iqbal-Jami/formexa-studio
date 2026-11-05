@@ -1,0 +1,42 @@
+---
+import { solutions } from '../data/content.js';
+import Art from './Art.astro';
+const total = String(solutions.length).padStart(2, '0');
+---
+<section class="solutions solutions--list" id="solutions">
+  <header class="sec-head">
+    <div>
+      <p class="eyebrow">Solutions for you</p>
+      <h2 class="h2" data-split>Everything your business needs to move forward.</h2>
+    </div>
+    <p class="sec-head__side">Four services that work on their own, and better together. Open one to see what it covers.</p>
+  </header>
+
+  <div class="sols" data-sols>
+    {solutions.map((s, i) => (
+      <article class={`sol sol--${s.theme}${i === 0 ? ' is-open' : ''}`} data-sol>
+        <h3 class="sol__head">
+          <button class="sol__btn" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`sol-${i}`} id={`sol-btn-${i}`}>
+            <span class="sol__idx">{String(i + 1).padStart(2, '0')}/{total}</span>
+            <span class="sol__title">{s.title}</span>
+            <i class="sol__icon" aria-hidden="true"></i>
+          </button>
+        </h3>
+        <div class="sol__panel" id={`sol-${i}`} role="region" aria-labelledby={`sol-btn-${i}`}>
+          <div class="sol__inner">
+            <div class="sol__body">
+              <div class="sol__text">
+                <p class="sol__line">{s.line}</p>
+                <ul class="tags">
+                  {s.tags.map((t) => <li>{t}</li>)}
+                </ul>
+                <a href="#contact" class="link-arrow" data-magnetic>View more</a>
+              </div>
+              <div class="sol__art"><Art kind={s.kind} /></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

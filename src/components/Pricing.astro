@@ -1,0 +1,23 @@
+---
+import { plans } from '../data/content.js';
+---
+<section class="pricing" id="pricing">
+  <header class="sec-head">
+    <h2 class="h2" data-split>Start where you are. Grow from there.</h2>
+    <p class="sec-head__side">Starting prices in US dollars. Need something different? Tell us what you're building and we'll shape a plan around it.</p>
+  </header>
+  <div class="plans">
+    {plans.map((p) => (
+      <article class={`plan ${p.featured ? 'plan--featured' : ''}`} data-plan>
+        {p.featured && <span class="plan__flag">Most chosen</span>}
+        <h3 class="plan__name">{p.name} plan</h3>
+        <p class="plan__blurb">{p.blurb}</p>
+        <p class="plan__price"><sup>$</sup><b data-count={p.price}>{p.price}</b><small>starting price</small></p>
+        <ul class="plan__list">
+          {p.features.map((f) => <li>{f}</li>)}
+        </ul>
+        <a href="#contact" class={`btn ${p.featured ? 'btn--butter' : 'btn--dark'}`} data-magnetic>Choose {p.name}</a>
+      </article>
+    ))}
+  </div>
+</section>

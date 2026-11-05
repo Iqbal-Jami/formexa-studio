@@ -1,0 +1,42 @@
+---
+import { site } from '../data/content.js';
+---
+<section class="contact" id="contact">
+  <div class="contact__inner">
+    <h2 class="contact__title" data-letters aria-label="Build a digital presence that finally feels like your business.">
+      {'Build a digital presence that finally feels like your business.'.split(' ').map((word) => (
+        <span class="word" aria-hidden="true">
+          {word.split('').map((ch) => <span class="ch" data-ch>{ch}</span>)}
+        </span>
+      ))}
+    </h2>
+
+    <form class="form" data-form data-email={site.email} novalidate>
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field field--full">
+        <label for="f-type">Your business</label>
+        <select id="f-type" name="type">
+          <option>Wedding business</option>
+          <option>Photographer or creative</option>
+          <option>Lifestyle or local business</option>
+          <option>Aesthetic or beauty</option>
+          <option>Dental or healthcare practice</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field field--full">
+        <label for="f-msg">What are you building, and what isn't working today?</label>
+        <textarea id="f-msg" name="message" rows="4" required></textarea>
+      </div>
+      <p class="form__error" role="alert" data-error hidden></p>
+      <button class="btn btn--butter btn--lg" type="submit" data-magnetic>Send my enquiry</button>
+    </form>
+  </div>
+</section>

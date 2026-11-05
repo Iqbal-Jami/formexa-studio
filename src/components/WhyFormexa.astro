@@ -1,0 +1,39 @@
+---
+// Second stacked-cards section. Shares .stack / .card / [data-card] with Solutions;
+// the --frame modifiers only change the look.
+import { promise } from '../data/content.js';
+import Art from './Art.astro';
+const total = String(promise.items.length).padStart(2, '0');
+---
+<section class="promise" id="why">
+  <header class="promise__head">
+    <p class="eyebrow eyebrow--dot">{promise.eyebrow}</p>
+    <h2 class="promise__title">
+      <span>{promise.title}</span>
+      <span class="promise__outline">{promise.titleOutline}</span>
+    </h2>
+  </header>
+
+  <div class="stack stack--frame">
+    {promise.items.map((p, i) => (
+      <article class="card card--frame" data-card style={`--i:${i}`}>
+        <div class="frame__main">
+          <span class="frame__idx">{String(i + 1).padStart(2, '0')}/{total}</span>
+          <h3 class="frame__title">{p.title}</h3>
+          <a href="#contact" class="btn-frame">View more</a>
+        </div>
+        <div class="frame__mid">
+          <ul class="frame__tags">
+            {p.tags.map((t) => <li>{t}</li>)}
+          </ul>
+          <p class="frame__line">{p.line}</p>
+        </div>
+        <div class={`frame__media frame__media--${p.theme}`}>
+          {p.image
+            ? <img src={p.image} alt="" loading="lazy" decoding="async" />
+            : <Art kind={p.kind} />}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

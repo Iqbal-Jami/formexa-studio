@@ -1,0 +1,24 @@
+---
+import { industries } from '../data/content.js';
+---
+<section class="industries" id="industries" data-industries>
+  <div class="industries__pin" data-pin>
+    <header class="industries__head">
+      <h2 class="h2 h2--light" data-split>Built for businesses like yours.</h2>
+      <div class="industries__meter" aria-hidden="true"><i data-meter></i></div>
+    </header>
+    <div class="industries__track" data-track>
+      {industries.map((ind, i) => (
+        <article class="panel" style={`--c:${ind.color}`} data-panel>
+          <span class="panel__big" aria-hidden="true">{ind.name.split(' ')[0]}</span>
+          <div class="panel__body">
+            <h3 class="panel__name">{ind.name}</h3>
+            <p class="panel__who">{ind.who}</p>
+            <p class="panel__line">{ind.line}</p>
+            <a class="btn btn--dark" href={ind.href} data-magnetic>{ind.cta}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

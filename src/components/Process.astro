@@ -1,0 +1,23 @@
+---
+import { process } from '../data/content.js';
+---
+<section class="process" id="process" data-process>
+  <div class="process__intro">
+    <h2 class="h2" data-split>From idea to impact.</h2>
+    <p class="process__sub">Our step-by-step process to build success. Five stages, each with a clear outcome.</p>
+  </div>
+  <ol class="steps">
+    <span class="steps__rail" aria-hidden="true"><i data-rail></i></span>
+    {process.map((s, i) => (
+      <li class="step" data-step>
+        <span class="step__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        <div class="step__body">
+          <h3 class="step__title">{s.title}</h3>
+          <ul class="step__points">
+            {s.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

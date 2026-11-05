@@ -1,0 +1,18 @@
+---
+import { ticker } from '../data/content.js';
+
+// variant: 'butter' (solid yellow band), 'outline' (giant outlined words on navy), 'lilac' (calm solid band)
+// reverse: scrolls left to right instead of right to left
+const { items = ticker, variant = 'butter', reverse = false, speed = 80 } = Astro.props;
+// Four copies so the track is always wider than the screen. The script loops over half of it.
+const list = [...items, ...items, ...items, ...items];
+---
+<div class={`marquee marquee--${variant}`} aria-hidden="true">
+  <div class="marquee__track" data-marquee data-dir={reverse ? 'right' : 'left'} data-speed={speed}>
+    {list.map((t, i) => (
+      <span class={`marquee__item${variant === 'outline' && i % 2 === 1 ? ' is-fill' : ''}`}>
+        {t}<i class="marquee__star"></i>
+      </span>
+    ))}
+  </div>
+</div>

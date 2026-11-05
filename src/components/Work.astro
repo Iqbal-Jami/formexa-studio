@@ -1,0 +1,20 @@
+---
+import { work } from '../data/content.js';
+---
+<section class="work" id="work" data-work>
+  <header class="sec-head sec-head--tight">
+    <h2 class="h2" data-split>Work that speaks for itself.</h2>
+  </header>
+  <ul class="work__list">
+    {work.map((w) => (
+      <li>
+        <a class="work__row" href={w.href} data-row style={`--a:${w.hue[0]};--b:${w.hue[1]}`}>
+          <span class="work__name">{w.name}</span>
+          <span class="work__go">View project</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <a class="link-arrow work__all" href="https://formexastudio.com/portfolio" data-magnetic>View all work</a>
+  <div class="work__peek" data-peek aria-hidden="true"><span data-peek-label></span></div>
+</section>

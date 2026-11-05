@@ -1,0 +1,23 @@
+---
+import { faqs } from '../data/content.js';
+---
+<section class="faq" id="faq">
+  <div class="faq__side">
+    <h2 class="h2" data-split>Frequently asked questions.</h2>
+    <p>Can't find your answer? Tell us what you need and we'll reply.</p>
+    <a href="#contact" class="btn btn--dark" data-magnetic>Let's talk</a>
+  </div>
+  <div class="faq__list">
+    {faqs.map((f, i) => (
+      <div class="qa" data-qa>
+        <button class="qa__q" aria-expanded="false" aria-controls={`qa-${i}`} id={`qb-${i}`}>
+          <span>{f.q}</span>
+          <i class="qa__icon" aria-hidden="true"></i>
+        </button>
+        <div class="qa__a" id={`qa-${i}`} role="region" aria-labelledby={`qb-${i}`}>
+          <p>{f.a}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

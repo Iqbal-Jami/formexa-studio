@@ -1,0 +1,29 @@
+---
+import { solutions } from '../data/content.js';
+import Art from './Art.astro';
+---
+<section class="solutions" id="solutions">
+  <header class="sec-head">
+    <div>
+      <p class="eyebrow">Solutions for you</p>
+      <h2 class="h2" data-split>Everything your business needs to move forward.</h2>
+    </div>
+    <p class="sec-head__side">Four services that work on their own, and better together.</p>
+  </header>
+
+  <div class="stack">
+    {solutions.map((s, i) => (
+      <article class={`card card--${s.theme}`} data-card style={`--i:${i}`}>
+        <div class="card__text">
+          <h3 class="card__title">{s.title}</h3>
+          <p class="card__line">{s.line}</p>
+          <ul class="tags">
+            {s.tags.map((t) => <li>{t}</li>)}
+          </ul>
+          <a href="#contact" class="link-arrow" data-magnetic>Talk to us about this</a>
+        </div>
+        <div class="card__art"><Art kind={s.kind} /></div>
+      </article>
+    ))}
+  </div>
+</section>
