@@ -70,6 +70,14 @@ export const solutions = [
     tags: ['Workflow Automation', 'Lead Automation', 'AI Integrations', 'Business Systems'],
     kind: 'auto',
     theme: 'ink',
+    // Labelled step flow under the illustration (same step names as the Process section).
+    flow: [
+      { label: 'Discovery', icon: 'search' },
+      { label: 'Planning', icon: 'plan' },
+      { label: 'Design', icon: 'design' },
+      { label: 'Development & Growth', icon: 'build' },
+      { label: 'Launch & Support', icon: 'launch' },
+    ],
   },
 ];
 

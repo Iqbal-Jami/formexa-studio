@@ -9,6 +9,8 @@
   --grad-end: #7B47F0;
   --lilac: #bdbaff;
   --mist: #e4e2ff;
+  --lilac-soft: color-mix(in srgb, var(--lilac) 55%, transparent); /* soft icon parts on dark cards */
+  --ink-soft: color-mix(in srgb, var(--ink) 55%, transparent); /* soft icon parts on lilac */
   --display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
   --body: 'Inter Variable', system-ui, sans-serif;
   --serif: 'Instrument Serif', Georgia, serif;
@@ -270,6 +272,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .pillars { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 clamp(1rem, 2vw, 2rem); padding: clamp(2rem, 5vw, 4rem) var(--pad) clamp(1.25rem, 3vw, 2rem); }
 .pillar { display: grid; gap: 0.6rem; padding-top: 1rem; border-top: 1.5px solid rgba(242, 241, 255, 0.35); font-family: var(--display); font-weight: 600; font-size: 1.1rem; }
 .pillar .art { width: 100%; height: clamp(60px, 8vw, 110px); }
+.pillars { --art-soft: var(--lilac); --art-accent: var(--paper); }
+.pillars .art [stroke-width="3"] { stroke-width: 5; }
 
 /* ───────── Illustration animations ───────── */
 .art { overflow: visible; }
@@ -305,6 +309,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ───────── Marquee ───────── */
 .marquee { overflow: hidden; background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); color: #fff; padding: 1.1rem 0; border-block: 2px solid var(--ink); }
+.marquee--butter { border-block: 0; }
 .marquee__track { display: flex; width: max-content; will-change: transform; }
 .marquee__item { display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem; font-family: var(--display); font-weight: 700; font-variation-settings: 'wdth' 80; font-size: clamp(1.8rem, 4vw, 3.4rem); letter-spacing: -0.03em; white-space: nowrap; }
 .marquee__star { width: 1.1rem; height: 1.1rem; background: var(--cobalt); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: spin2 6s linear infinite; }
@@ -327,15 +332,29 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform-origin: 50% 0;
   will-change: transform;
 }
-.card--paper { background: #fff; color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
-.card--butter { background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); color: #fff; --art-soft: rgba(13, 13, 43, 0.16); }
+.card--paper { background: #fff; color: var(--ink); }
+.card--butter { background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); color: #fff; --art-soft: var(--mist); --art-accent: var(--paper); }
 .card--lilac { background: var(--lilac); --art-soft: rgba(255, 255, 255, 0.55); }
-.card--ink { background: var(--ink); color: var(--paper); --art-ink: var(--paper); --art-soft: rgba(242, 241, 255, 0.16); --art-accent: url(#fx-grad-art); }
+.card--ink { background: var(--ink); color: var(--paper); --art-ink: var(--paper); --art-soft: var(--lilac-soft); --art-accent: url(#fx-grad-art); }
 .card__title { font-family: var(--display); font-weight: 650; font-variation-settings: 'wdth' 88; font-size: clamp(2.2rem, 4.6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.035em; text-wrap: balance; max-width: 14ch; }
 .card__line { margin-top: 1.25rem; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 28ch; line-height: 1.35; opacity: 0.85; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.75rem 0 2rem; }
 .tags li { padding: 0.4rem 0.95rem; border: 1.5px solid currentColor; border-radius: 999px; font-size: 0.92rem; }
 .card__art .art { width: 100%; height: auto; max-height: 52vh; }
+/* Step flow (Solutions card with s.flow): icons + labels joined by arrows; vertical when narrow */
+.card__art:has(.flow) { container-type: inline-size; }
+.flow { display: grid; gap: 0.9rem; margin-top: 1.5rem; }
+.flow__step { position: relative; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 600; line-height: 1.25; }
+.flow__icon { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--lilac); color: var(--ink); }
+.flow__icon svg { width: 1.25rem; height: 1.25rem; }
+.flow__step + .flow__step::before { content: ""; position: absolute; left: calc(1.3rem - 1px); bottom: calc(100% + 0.15rem); width: 2px; height: 0.6rem; background: var(--lilac); }
+.flow__step + .flow__step::after { content: ""; position: absolute; left: calc(1.3rem - 4px); bottom: calc(100% + 0.1rem); border: 4px solid transparent; border-top: 5px solid var(--lilac); border-bottom: 0; }
+@container (min-width: 30rem) {
+  .flow { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .flow__step { grid-template-columns: none; justify-items: center; align-content: start; gap: 0.55rem; text-align: center; font-size: 0.8rem; }
+  .flow__step + .flow__step::before { left: auto; right: calc(50% + 1.3rem + 0.45rem); bottom: auto; top: calc(1.3rem - 1px); width: calc(100% - 2.6rem - 0.4rem); height: 2px; }
+  .flow__step + .flow__step::after { left: auto; right: calc(50% + 1.3rem + 0.15rem); bottom: auto; top: calc(1.3rem - 4px); border: 4px solid transparent; border-left: 5px solid var(--lilac); border-right: 0; }
+}
 
 /* ───────── Why Formexa (stacked cards, framed look) ─────────
    Sticky + scale/dim effect comes from .card and the [data-card] scene in main.js.
@@ -370,10 +389,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .frame__media { position: relative; overflow: hidden; display: grid; place-items: center; min-height: 220px; border-radius: 0.5rem; padding: clamp(1rem, 2vw, 1.75rem); }
 .frame__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .frame__media .art { width: 100%; height: auto; max-height: 100%; }
-.frame__media--lilac { background: var(--lilac); --art-soft: rgba(255, 255, 255, 0.55); }
-.frame__media--butter { background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); --art-soft: rgba(13, 13, 43, 0.16); }
-.frame__media--cobalt { background: var(--cobalt); --art-ink: var(--paper); --art-soft: rgba(242, 241, 255, 0.22); --art-accent: url(#fx-grad-art); }
-.frame__media--ink { background: var(--ink); --art-ink: var(--paper); --art-soft: rgba(242, 241, 255, 0.16); --art-accent: url(#fx-grad-art); }
+.frame__media--lilac { background: var(--lilac); --art-soft: var(--ink-soft); }
+.frame__media--butter { background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); --art-soft: var(--mist); --art-accent: var(--paper); }
+.frame__media--cobalt { background: var(--cobalt); --art-ink: var(--paper); --art-soft: var(--lilac); --art-accent: var(--paper); }
+.frame__media--ink { background: var(--ink); --art-ink: var(--paper); --art-soft: var(--lilac-soft); --art-accent: var(--lilac); }
 
 /* Corner-bracket button (old-site style). Reusable anywhere. */
 .btn-frame { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 0.85rem 1.4rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; white-space: nowrap; color: var(--ink); transition: color 0.35s var(--ease); }
@@ -402,8 +421,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .industries__meter { width: min(26vw, 280px); height: 4px; background: rgba(242, 241, 255, 0.2); border-radius: 4px; overflow: hidden; margin-bottom: 0.8rem; }
 .industries__meter i { display: block; height: 100%; background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); transform: scaleX(0); transform-origin: 0 50%; }
 .industries__track { display: flex; gap: clamp(1rem, 2vw, 2rem); padding: 0 var(--pad); width: max-content; will-change: transform; }
-.panel { position: relative; overflow: hidden; width: min(78vw, 920px); height: min(58vh, 520px); display: flex; align-items: flex-end; padding: clamp(1.5rem, 3vw, 3rem); border-radius: 2rem; background: var(--c); color: var(--fg, var(--ink)); }
-.panel__big { position: absolute; left: 0.04em; top: -0.1em; font-family: var(--display); font-weight: 800; font-variation-settings: 'wdth' 75; font-size: clamp(6rem, 15vw, 13rem); line-height: 1; letter-spacing: -0.05em; color: rgba(13, 13, 43, 0.075); pointer-events: none; white-space: nowrap; }
+.panel { position: relative; overflow: hidden; width: min(78vw, 920px); height: min(58vh, 520px); display: flex; align-items: flex-end; padding: clamp(1.5rem, 3vw, 3rem); border-radius: 2rem; background: var(--c); color: var(--fg, var(--ink)); container-type: inline-size; }
+.panel__big { position: absolute; left: 0.04em; top: -0.1em; font-family: var(--display); font-weight: 800; font-variation-settings: 'wdth' 75; font-size: min(clamp(6rem, 15vw, 13rem), calc(100cqi / 5.25)); line-height: 1; letter-spacing: -0.05em; color: color-mix(in srgb, var(--fg, var(--ink)) var(--big-mix, 55%), transparent); pointer-events: none; white-space: nowrap; }
 .panel__body { position: relative; max-width: 46ch; display: grid; gap: 0.9rem; justify-items: start; }
 .panel__name { font-family: var(--display); font-weight: 650; font-variation-settings: 'wdth' 88; font-size: clamp(1.9rem, 3.6vw, 3.4rem); line-height: 1; letter-spacing: -0.035em; }
 .panel__who { font-weight: 600; font-size: 1rem; }
@@ -428,8 +447,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ───────── Work ───────── */
 .work { position: relative; background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%); color: #fff; padding: clamp(5rem, 10vw, 9rem) 0 clamp(4rem, 8vw, 7rem); }
-.work__list { border-top: 2px solid var(--ink); margin: 0 var(--pad); }
-.work__row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(1.2rem, 3vw, 2.4rem) 0; border-bottom: 2px solid var(--ink); transition: padding 0.6s var(--ease), color 0.4s; }
+.work__list { border-top: 2px solid var(--lilac); margin: 0 var(--pad); }
+.work__row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(1.2rem, 3vw, 2.4rem) 0; border-bottom: 2px solid var(--lilac); transition: padding 0.6s var(--ease), color 0.4s; }
 .work__name { font-family: var(--display); font-weight: 700; font-variation-settings: 'wdth' 82; font-size: clamp(2.4rem, 8.6vw, 8.5rem); line-height: 0.95; letter-spacing: -0.045em; transition: transform 0.6s var(--ease); }
 .work__go { font-family: var(--display); font-weight: 600; font-size: 1.05rem; opacity: 0; transform: translateX(-1rem); transition: opacity 0.4s, transform 0.6s var(--ease); white-space: nowrap; }
 .work__row:hover .work__name, .work__row:focus-visible .work__name { transform: translateX(1.2rem); }

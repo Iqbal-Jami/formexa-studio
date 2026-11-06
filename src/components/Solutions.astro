@@ -1,6 +1,14 @@
 ---
 import { solutions } from '../data/content.js';
 import Art from './Art.astro';
+// Small line icons for the optional step flow (s.flow in content.js).
+const flowIcons = {
+  search: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>',
+  plan: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/>',
+  design: '<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 7l3 3"/>',
+  build: '<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14"/>',
+  launch: '<path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/>',
+};
 ---
 <section class="solutions" id="solutions">
   <header class="sec-head">
@@ -22,7 +30,21 @@ import Art from './Art.astro';
           </ul>
           <a href="#contact" class="link-arrow" data-magnetic>Talk to us about this</a>
         </div>
-        <div class="card__art"><Art kind={s.kind} /></div>
+        <div class="card__art">
+          <Art kind={s.kind} />
+          {s.flow && (
+            <ol class="flow">
+              {s.flow.map((f) => (
+                <li class="flow__step">
+                  <span class="flow__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={flowIcons[f.icon]} />
+                  </span>
+                  <span class="flow__label">{f.label}</span>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
       </article>
     ))}
   </div>
