@@ -8,7 +8,7 @@ import { work } from '../data/content.js';
   <ul class="work__list">
     {work.map((w) => (
       <li>
-        <a class="work__row" href={w.href} data-row style={`--a:${w.hue[0]};--b:${w.hue[1]}`}>
+        <a class="work__row" href={w.href} data-row style={`--a:${w.hue[0]};--b:${w.hue[1]}${w.fg ? `;--fg:${w.fg}` : ''}`}>
           <span class="work__name">{w.name}</span>
           <span class="work__go">View project</span>
         </a>

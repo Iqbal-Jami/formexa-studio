@@ -9,7 +9,7 @@ import { industries } from '../data/content.js';
     </header>
     <div class="industries__track" data-track>
       {industries.map((ind, i) => (
-        <article class="panel" style={`--c:${ind.color}`} data-panel>
+        <article class="panel" style={`--c:${ind.color}${ind.fg ? `;--fg:${ind.fg}` : ''}`} data-panel>
           <span class="panel__big" aria-hidden="true">{ind.name.split(' ')[0]}</span>
           <div class="panel__body">
             <h3 class="panel__name">{ind.name}</h3>

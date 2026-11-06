@@ -136,7 +136,8 @@ export const industries = [
     line: 'Clear, beautiful digital experiences designed around couples, trust and connection.',
     href: 'https://wedding.formexastudio.com/',
     cta: 'Visit Wedding Formexa',
-    color: '#FFE066',
+    color: 'linear-gradient(135deg, var(--grad-start) 0%, var(--grad-end) 100%)',
+    fg: '#fff',
   },
   {
     name: 'Photographers & Creatives',
@@ -197,7 +198,7 @@ export const process = [
 
 export const work = [
   { name: 'Edvice Global', href: 'https://formexastudio.com/portfolio/makeup-artists/', hue: ['#2B2BFF', '#BDBAFF'] },
-  { name: 'Precision Painting Plus', href: 'https://formexastudio.com/portfolio/wedding-photography/', hue: ['#FFE066', '#FF9EC4'] },
+  { name: 'Precision Painting Plus', href: 'https://formexastudio.com/portfolio/wedding-photography/', hue: ['var(--grad-start)', 'var(--grad-end)'], fg: '#fff' },
   { name: 'High Rocks', href: 'https://formexastudio.com/portfolio', hue: ['#0D0D2B', '#9FF0D0'] },
 ];
 

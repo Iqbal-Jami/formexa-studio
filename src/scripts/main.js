@@ -393,6 +393,7 @@ if (peek && fine && !reduce) {
     row.addEventListener('pointerenter', () => {
       peek.style.setProperty('--a', row.style.getPropertyValue('--a'));
       peek.style.setProperty('--b', row.style.getPropertyValue('--b'));
+      peek.style.color = row.style.getPropertyValue('--fg');
       label.textContent = $('.work__name', row).textContent;
       peek.classList.add('is-on');
     });
